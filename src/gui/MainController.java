@@ -1,5 +1,7 @@
 package gui;
 
-public class MainController {
+import javafx.scene.layout.AnchorPane;
+
+public class MainController extends AnchorPane{
 
 }
