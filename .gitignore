@@ -1,0 +1,39 @@
+# Compiled Java bytecode
+*.class
+*.jar
+*.war
+*.ear
+
+# Build output directories
+/bin/
+/build/
+/target/
+/out/
+
+# IDE files (Eclipse)
+.idea/
+*.iml
+*.iws
+*.ipr
+.classpath
+.project
+.settings/
+.vscode/
+
+# OS metadata
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Log files
+*.log
+
+# Local image datasets
+ /images/
+# /data/
+
+# Backup files
+*.bak
+*.tmp
+*.swp
+*~
