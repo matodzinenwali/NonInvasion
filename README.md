@@ -19,11 +19,11 @@ Project structure
 ├── similarity/               - Matching individuals using your data structures  
 │   ├── FeatureDictionary.java (uses your Dictionary to store feature vectors keyed by animal ID)  
 │   ├── SimilaritySearch.java   (uses Heap to find top‑K nearest neighbours)  
-│   └── DistanceMetric.java     (Euclidean, Manhattan, etc.)  
+│   └── DistanceMetric.java     (Euclidean)  
 │  
 ├── pathfinding/              - Pathfinding on an image (for drone planning)  
 │   ├── ImageGraphAdapter.java (interprets an image as a grid graph for pathfinding)  
-│   └── ShortestPathFinder.java (uses your Queue (BFS) or Heap (Dijkstra))  
+│   └── ShortestPathFinder.java (uses Queue (BFS) or Heap (Dijkstra))  
 │  
 ├── gui/                      - JavaFX views  
 │   ├── MainController.java
