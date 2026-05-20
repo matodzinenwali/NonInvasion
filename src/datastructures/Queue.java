@@ -1,43 +1,51 @@
 package datastructures;
 
+import interfaces.IList;
 import interfaces.IQueue;
 
 public class Queue<T> implements IQueue<T> {
+	
+	//using my custom LinkedList
+	private final IList<T> list;
+	
+	public Queue() {
+		this.list = new LinkedList<>();
+	}
 
 	@Override
 	public void enqueue(T element) {
-		// TODO Auto-generated method stub
-		
+		list.add(element);
 	}
 
 	@Override
 	public T dequeue() {
-		// TODO Auto-generated method stub
-		return null;
+		if(isEmpty()) {
+			throw new IllegalStateException("Queue is empty");
+		}
+		return list.remove(0); // remove from the front(head)
 	}
 
 	@Override
 	public T peek() {
-		// TODO Auto-generated method stub
-		return null;
+		if(isEmpty()) {
+			throw new IllegalStateException("Queue is empty");
+		}
+		return list.get(0);
 	}
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		return list.isEmpty();
 	}
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		return list.size();
 	}
 
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
-		
+		list.clear();
 	}
 
 }
