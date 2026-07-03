@@ -5,7 +5,7 @@ import interfaces.IQueue;
 
 public class Queue<T> implements IQueue<T> {
 	
-	//using my custom LinkedList
+	//using my custom LinkedList - linked list based implementation of a queue
 	private final IList<T> list;
 	
 	public Queue() {
