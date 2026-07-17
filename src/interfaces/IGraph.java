@@ -12,4 +12,5 @@ public interface IGraph<T> {
     boolean containsEdge(T from, T to);
     void removeNode(T node);
     void removeEdge(T from, T to);
+    IList<T> shortestPath(T source, T dstination);
 }
