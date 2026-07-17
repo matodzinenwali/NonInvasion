@@ -1,35 +1,46 @@
-Project structure  
+# WildTrack – Non‑Invasive Wildlife Monitoring System
 
-├── main/                     - Main class & JavaFX launcher  
-│   └── Main.java          (extends Application)  
-│  
-├── datastructures/           - custom implementations (no java.util.*)  
-│   ├── Graph.java            (ADT: nodes + edges, adjacency list using your own List)  
-│   ├── Heap.java             (min heap for priority queue)  
-│   ├── Queue.java            (simple queue – can use LinkedList you write)  
-│   ├── Dictionary.java       (map interface – hash table or trie)  
-│   ├── List.java             (singly- for adjacency)  
-│   └── Tree.java             (general tree or binary search tree, e.g., KD‑Tree)  
-│  
-├── image/                    - Image loading & processing (no external APIs)  
-│   ├── ImageLoader.java      (reads BufferedImage from local disk)  
-│   ├── FeatureExtractor.java (converts image to a feature vector or graph)  
-│   └── GraphBuilder.java     (builds a Graph from an image: pixels/regions as nodes)  
-│  
-├── similarity/               - Matching individuals using your data structures  
-│   ├── FeatureDictionary.java (uses your Dictionary to store feature vectors keyed by animal ID)  
-│   ├── SimilaritySearch.java   (uses Heap to find top‑K nearest neighbours)  
-│   └── DistanceMetric.java     (Euclidean)  
-│  
-├── pathfinding/              - Pathfinding on an image (for drone planning)  
-│   ├── ImageGraphAdapter.java (interprets an image as a grid graph for pathfinding)  
-│   └── ShortestPathFinder.java (uses Queue (BFS) or Heap (Dijkstra))  
-│  
-├── gui/                      - JavaFX views  
-│   ├── MainController.java
-│   ├── ImageViewer.java
-│   └── ResultDisplay.java
-│
-└── domain/                   - Business objects
-    ├── Animal.java           (id, species, feature vector)
-    └── ImageRegion.java      (node representation: coordinates, colour, texture)
+A desktop application for South African ecologists that uses graph‑based data structures to identify individual animals from images and compute optimal drone flight paths. Built entirely from scratch in Java with JavaFX – no external libraries, no network communication, no APIs.
+
+## Project Overview
+
+WildTrack addresses two key challenges in wildlife conservation:
+
+1. **Individual Animal Identification**  
+   - Recognises specific animals (rhinos, leopards, etc.) from photographs.  
+   - Matches unique physical features – coat patterns, ear notches, scars – using custom similarity algorithms.  
+   - Completely non‑invasive: no tracking devices, tags, or collars required.
+
+2. **Drone Path Optimisation**  
+   - Simulates battery‑efficient flight routes across terrain images.  
+   - Uses graph‑based shortest‑path algorithms to cover more ground with less energy.  
+   - Demonstrates how autonomous drones can support conservation without disturbing wildlife.
+
+All processing is performed locally on the user's machine, ensuring data privacy and avoiding reliance on internet connectivity in remote field locations.
+
+## Project Theme
+
+This project implements the theme of **Emergent Graph Structures for Image Similarity, Classification, and Path Finding**. Graphs are used to:
+
+- Model spatial relationships between pixels and regions in images.
+- Enable similarity searches across collections of animal photographs.
+- Compute optimal routes for drone navigation using Dijkstra's algorithm.
+
+## Technology Stack
+
+- **Java 17** – Core programming language.
+- **JavaFX 17** – Desktop GUI framework.
+- **Custom Data Structures** – All graph, tree, heap, queue, and dictionary implementations are written from scratch (no `java.util.*` collections used).
+
+## Features
+
+- Load and display animal images from local directories.
+- Extract feature vectors (colour histograms, edge orientation, down‑sampled pixel grids).
+- Index known individuals using a KD‑Tree for fast nearest‑neighbour search.
+- Query an unknown animal photo and return the top‑K best matches.
+- View similarity scores for matching results.
+- Convert any image into a weighted graph (pixels or regions as nodes).
+- Compute and visualise the shortest path between two selected points on an image.
+- Simulate drone route planning using region‑based graph abstraction.
+
+
