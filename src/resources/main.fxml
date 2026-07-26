@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" 
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="za.ac.university.csc3a.miniproject.gui.MainController"
+            style="-fx-background-color: #f4f6f9;">
+
+    <!--TOP: Menu Bar -->
+    <top>
+        <MenuBar>
+            <Menu text="File">
+                <MenuItem text="Load Database" onAction="#handleLoadDatabase"/>
+                <MenuItem text="Load Query" onAction="#handleLoadQuery"/>
+                <SeparatorMenuItem/>
+                <MenuItem text="Load Pathfinding Image" onAction="#handleLoadPathImage"/>
+                <SeparatorMenuItem/>
+                <MenuItem text="Exit" onAction="#handleExit"/>
+            </Menu>
+            <Menu text="Help">
+                <MenuItem text="About" onAction="#handleAbout"/>
+            </Menu>
+        </MenuBar>
+    </top>
+
+    <!-- CENTER: TabPane -->
+    <center>
+        <TabPane fx:id="mainTabPane" tabClosingPolicy="TabPane.TabClosingPolicy.UNAVAILABLE"
+                 style="-fx-background-color: white; -fx-padding: 10;">
+            
+            <!----> TAB 1: Identification -->
+            <Tab text="Animal Identification" closable="false">
+                <GridPane hgap="10" vgap="10" style="-fx-padding: 20;">
+                    
+                    <!-- Row 1: Database path -->
+                    <Label text="Database:" GridPane.columnIndex="0" GridPane.rowIndex="0" 
+                           style="-fx-font-weight: bold;"/>
+                    <TextField fx:id="databasePathField" editable="false" 
+                               GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                    <Button fx:id="loadDbButton" text="Browse Database..." 
+                            onAction="#handleLoadDatabase" 
+                            GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+                    
+                    <!-- Row 2: Query path -->
+                    <Label text="Query:" GridPane.columnIndex="0" GridPane.rowIndex="1"
+                           style="-fx-font-weight: bold;"/>
+                    <TextField fx:id="queryPathField" editable="false" 
+                               GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                    <HBox spacing="5" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                        <Button fx:id="loadQueryButton" text="Load Query..." 
+                                onAction="#handleLoadQuery"/>
+                        <Button fx:id="clearQueryButton" text="Clear" 
+                                onAction="#handleClearQuery"/>
+                    </HBox>
+                    
+                    <!-- Row 3: Top-K -->
+                    <Label text="Top K:" GridPane.columnIndex="0" GridPane.rowIndex="2"
+                           style="-fx-font-weight: bold;"/>
+                    <TextField fx:id="topKField" text="3" maxWidth="60" 
+                               GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                    <Button fx:id="identifyButton" text="Identify" 
+                            onAction="#handleIdentify" 
+                            GridPane.columnIndex="2" GridPane.rowIndex="2"
+                            style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold;"/>
+                    
+                    <!-- Row 4: Image views -->
+                    <VBox spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="3"
+                          GridPane.columnSpan="3">
+                        <Label text="Database Image (sample)" style="-fx-font-weight: bold;"/>
+                        <ImageView fx:id="dbImageView" fitHeight="150" fitWidth="150" 
+                                   preserveRatio="true" style="-fx-border-color: #bdc3c7; -fx-border-width: 1;"/>
+                    </VBox>
+                    
+                    <VBox spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="4"
+                          GridPane.columnSpan="3">
+                        <Label text="Query Image" style="-fx-font-weight: bold;"/>
+                        <ImageView fx:id="queryImageView" fitHeight="200" fitWidth="200" 
+                                   preserveRatio="true" style="-fx-border-color: #bdc3c7; -fx-border-width: 1;"/>
+                    </VBox>
+                    
+                    <!-- Row 5: Results -->
+                    <VBox spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="5"
+                          GridPane.columnSpan="3">
+                        <Label text="Matches" style="-fx-font-weight: bold;"/>
+                        <Label fx:id="matchStatusLabel" style="-fx-text-fill: #7f8c8d; -fx-font-style: italic;"/>
+                        <ListView fx:id="matchListView" prefHeight="150" 
+                                  style="-fx-border-color: #bdc3c7; -fx-border-width: 1;"/>
+                    </VBox>
+                    
+                </GridPane>
+            </Tab>
+            
+            <!--TAB 2: Pathfinding  -->
+            <Tab text="Drone Path Planning" closable="false">
+                <GridPane hgap="10" vgap="10" style="-fx-padding: 20;">
+                    
+                    <!-- Row 1: Image -->
+                    <VBox spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="0"
+                          GridPane.columnSpan="2">
+                        <HBox spacing="10">
+                            <Button fx:id="loadPathImageButton" text="Load Image..." 
+                                    onAction="#handleLoadPathImage"/>
+                            <Button fx:id="clearPathButton" text="Clear" 
+                                    onAction="#handleClearPath"/>
+                            <Label text="Click on image to set start & end points." 
+                                   style="-fx-text-fill: #7f8c8d; -fx-font-style: italic;"/>
+                        </HBox>
+                        <ImageView fx:id="pathImageView" fitHeight="400" fitWidth="500" 
+                                   preserveRatio="true" style="-fx-border-color: #bdc3c7; -fx-border-width: 2; -fx-cursor: crosshair;"/>
+                    </VBox>
+                    
+                    <!-- Row 2: Controls -->
+                    <GridPane hgap="10" vgap="10" GridPane.columnIndex="0" GridPane.rowIndex="1"
+                              GridPane.columnSpan="2">
+                        <Label text="Start:" GridPane.columnIndex="0" GridPane.rowIndex="0"
+                               style="-fx-font-weight: bold;"/>
+                        <Label fx:id="startPointLabel" text="(click image to set)" 
+                               GridPane.columnIndex="1" GridPane.rowIndex="0"
+                               style="-fx-text-fill: #2c3e50;"/>
+                        
+                        <Label text="End:" GridPane.columnIndex="0" GridPane.rowIndex="1"
+                               style="-fx-font-weight: bold;"/>
+                        <Label fx:id="endPointLabel" text="(click image to set)" 
+                               GridPane.columnIndex="1" GridPane.rowIndex="1"
+                               style="-fx-text-fill: #2c3e50;"/>
+                        
+                        <Button fx:id="findPathButton" text="Find Shortest Path" 
+                                onAction="#handleFindPath" GridPane.columnIndex="0" GridPane.rowIndex="2"
+                                style="-fx-background-color: #2980b9; -fx-text-fill: white; -fx-font-weight: bold;"/>
+                        
+                        <Label fx:id="pathStatusLabel" GridPane.columnIndex="1" GridPane.rowIndex="2"
+                               style="-fx-text-fill: #7f8c8d; -fx-font-style: italic;"/>
+                    </GridPane>
+                    
+                    <!-- Row 3: Path results -->
+                    <VBox spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="2"
+                          GridPane.columnSpan="2">
+                        <Label text="Path Details" style="-fx-font-weight: bold;"/>
+                        <ListView fx:id="pathListView" prefHeight="150" 
+                                  style="-fx-border-color: #bdc3c7; -fx-border-width: 1;"/>
+                    </VBox>
+                    
+                </GridPane>
+            </Tab>
+            
+        </TabPane>
+    </center>
+
+    <!-- BOTTOM: Status Bar -->
+    <bottom>
+        <HBox spacing="10" style="-fx-padding: 5 10; -fx-background-color: #ecf0f1; -fx-border-color: #bdc3c7; -fx-border-width: 1 0 0 0;">
+            <Label fx:id="statusLabel" text="Ready" style="-fx-font-size: 12px; -fx-text-fill: #2c3e50;"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <ProgressBar fx:id="progressBar" prefWidth="100" progress="0"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>
