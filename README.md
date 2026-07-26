@@ -28,8 +28,8 @@ This project implements the theme of **Emergent Graph Structures for Image Simil
 
 ## Technology Stack
 
-- **Java 17** – Core programming language.
-- **JavaFX 17** – Desktop GUI framework.
+- **Java 21** – Core programming language.
+- **JavaFX 21** – Desktop GUI framework.
 - **Custom Data Structures** – All graph, tree, heap, queue, and dictionary implementations are written from scratch (no `java.util.*` collections used).
 
 ## Features
